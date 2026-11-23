@@ -1,0 +1,85 @@
+(kicad_pcb (version 20240108) (generator pcbnew)
+
+  (general
+    (thickness 1.6)
+  )
+
+  (paper "A4")
+
+  (layers
+    (0 "F.Cu" signal)
+    (1 "In1.Cu" power)
+    (2 "In2.Cu" power)
+    (31 "B.Cu" signal)
+    (32 "B.Adhes" user "B.Adhesive")
+    (33 "F.Adhes" user "F.Adhesive")
+    (34 "B.Paste" user)
+    (35 "F.Paste" user)
+    (36 "B.SilkS" user "B.SilkScreen")
+    (37 "F.SilkS" user "F.SilkScreen")
+    (38 "B.Mask" user)
+    (39 "F.Mask" user)
+    (40 "Dwgs.User" user)
+    (41 "Cmts.User" user)
+    (44 "Edge.Cuts" user)
+  )
+
+  (setup
+    (pad_to_mask_clearance 0.05)
+  )
+
+  (net 0 "")
+  (net 1 "+5V")
+  (net 2 "+3V3")
+  (net 3 "GND")
+  (net 4 "CLK_50MHz")
+
+  (footprint "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" (layer "F.Cu")
+    (at 10 10)
+    (unit 1)
+    (attr through_hole)
+    (fp_text reference "J1_VRM" (at 0 -3.5) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad "1" thru_hole rect (at 0 0) (size 1.7 1.7) (drill 1.0) (layers *.Cu *.Mask) (net 1 "+5V"))
+    (pad "2" thru_hole circle (at 2.5 0) (size 1.7 1.7) (drill 1.0) (layers *.Cu *.Mask) (net 3 "GND"))
+  )
+
+  (footprint "Package_QFP:TQFP-48_7x7mm_P0.5mm" (layer "F.Cu")
+    (at 40 25)
+    (unit 1)
+    (attr smd)
+    (fp_text reference "U1_MCU" (at 0 -5) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad "1" smd rect (at -4.25 2.25) (size 1.2 0.3) (layers "F.Cu" "F.Paste" "F.Mask") (net 1 "+5V"))
+    (pad "2" smd rect (at -4.25 1.75) (size 1.2 0.3) (layers "F.Cu" "F.Paste" "F.Mask") (net 4 "CLK_50MHz"))
+    (pad "24" smd rect (at 4.25 -2.25) (size 1.2 0.3) (layers "F.Cu" "F.Paste" "F.Mask") (net 3 "GND"))
+  )
+
+  (footprint "Package_BGA:BGA-256_17x17_1.0mm" (layer "F.Cu")
+    (at 75 10)
+    (unit 1)
+    (attr smd)
+    (fp_text reference "U2_FPGA" (at 0 -10) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)))
+    )
+    (pad "A1" smd circle (at -7.5 -7.5) (size 0.5 0.5) (layers "F.Cu" "F.Paste" "F.Mask") (net 1 "+5V"))
+    (pad "B1" smd circle (at -6.5 -7.5) (size 0.5 0.5) (layers "F.Cu" "F.Paste" "F.Mask") (net 3 "GND"))
+  )
+
+  ;; Power Net +5V Traces
+  (segment (start 10 10) (end 25 10) (width 1.5) (layer "F.Cu") (net 1))
+  (segment (start 25 10) (end 40 10) (width 0.35) (layer "F.Cu") (net 1)) ;; Bottleneck high-current density trace
+  (segment (start 40 10) (end 40 22.75) (width 1.0) (layer "F.Cu") (net 1))
+  (segment (start 40 22.75) (end 35.75 22.75) (width 0.8) (layer "F.Cu") (net 1))
+  (segment (start 40 10) (end 67.5 2.5) (width 1.2) (layer "F.Cu") (net 1))
+
+  ;; High-Speed Signal Net CLK_50MHz Traces
+  (segment (start 35.75 21.75) (end 20 21.75) (width 0.2) (layer "F.Cu") (net 4))
+  (segment (start 20 21.75) (end 10 30) (width 0.2) (layer "F.Cu") (net 4))
+
+  ;; Power Vias
+  (via (at 25 10) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net 1))
+  (via (at 40 10) (size 0.8) (drill 0.4) (layers "F.Cu" "B.Cu") (net 1))
+)
